@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "med-tel-plus": {
+      "hosting": {
+        "zyntax-blog": [
+          "med-tel-plus"
+        ]
+      }
+    }
+  }
+}
