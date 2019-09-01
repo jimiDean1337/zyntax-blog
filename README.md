@@ -27,9 +27,9 @@ Compiled AOT from *.ts* to *.js*
 
 Thanks to Firebase and AngularFire, we can write Nodejs scripts, then use a firebase trigger to call our server function which fires a callback returning our firestore, database or storage data.
 
-## The TODO List
-
 ----------
+
+## The TODO List
 
 - Add About page content
 - Add feature to create and edit other domain content
