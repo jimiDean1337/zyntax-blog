@@ -1,27 +1,44 @@
 # ZyntaxBlog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.0.
+ MedTelPlus Web App Version 0.1.0.
 
-## Development server
+## In development
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This blog platform will be integrated with [MedTelPlus](https://medtelplus.com).
 
-## Code scaffolding
+## List of Module Dependencies
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    1. [NgBootstrap](http://getbootstrap.com)
+    2. [AngularFire](http://firebase.com)
+    3. [RXJS](https://rxjs-dev.firebaseapp.com)
+    4. [Syncfusion](https://ej2.syncfusion.com/angular)
+    5. [Ngx Owl Carousel](https://github.com/vitalii-andriiovskyi/ngx-owl-carousel-o)
 
-## Build
+Compiled AOT from *.ts* to *.js*
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Features
 
-## Running unit tests
+- Admin Login for domain write, read and update access
+- Rich Text Editor for creating and editing content
+- Image uploading and storage
+- Post filtering by date and tag TODO: filter by author
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Server-Side with Firebase Functions
 
-## Running end-to-end tests
+Thanks to Firebase and AngularFire, we can write Nodejs scripts, then use a firebase trigger to call our server function which fires a callback returning our firestore, database or storage data.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## The TODO List
 
-## Further help
+----------
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Add About page content
+- Add feature to create and edit other domain content
+- Add save and exit capability
+- Refactor Module: Image Upload
+- Refactor/Redesign Contact page
+
+----------
+
+## Hopes and Dreams
+
+The end product should be a fully functional, and fully independent blog platform that will easily integrate and scale with MedTelPlus, perhaps on a subdomain.
