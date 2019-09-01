@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { RichTextEditorComponent, ToolbarService, LinkService, ImageService } from '@syncfusion/ej2-angular-richtexteditor';
 import { HtmlEditorService, CountService, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 import { Link, Count, HtmlEditor, QuickToolbar } from '@syncfusion/ej2-angular-richtexteditor';
@@ -10,18 +10,19 @@ import { BehaviorSubject, combineLatest } from 'rxjs';
   providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, CountService, QuickToolbarService]
 })
 export class TextEditorComponent implements OnInit {
+  @Input() htmlValue?: any;
   @ViewChild('apiRTE', null) rteObj: RichTextEditorComponent;
   @ViewChild('readonly', null) readonlyObj: /* CheckBoxComponent */ any;
   @ViewChild('enable', null) enableObj: /* CheckBoxComponent */ any;
   @ViewChild('enablehtml', null) enablehtmlObj: /* CheckBoxComponent */ any;
   @ViewChild('numeric', null) numericObj: /* NumericTextBoxComponent */ any;
   @Output() editorContentChanged = new EventEmitter<any>(null);
-  maxLength: number = 1000;
+  maxLength: number = 2000;
   numericValue: number = 1000;
   numericmin: number = 555;
   numericmax: number = 2000;
   numericformat: string = 'n0';
-  iframe: object = { enable: true };
+  iframe: object = { enable: false, };
   height: number = 500;
   postContentCache$: BehaviorSubject<any>;
 
@@ -30,10 +31,13 @@ export class TextEditorComponent implements OnInit {
   }
 
   ngOnInit() {
+    // if (this.htmlValue) {
+    //   this.rteObj.value = this.rteObj.this.htmlValue;
+    // }
   }
 
   showNewValue(e) {
-    console.log('event', e);
+    console.log('event', this.rteObj.value);
     this.postContentCache$.next(e);
     this.editorContentChanged.emit(e);
   }

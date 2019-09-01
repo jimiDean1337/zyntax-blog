@@ -21,8 +21,8 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
     }
 
-    formatPost(title: string, subtitle: string, mastheadImgUrl: string, html: any, isPrivate = false, tags = []) {
-        this.newPost = { title, subtitle, mastheadImgUrl, html, isPrivate, tags, timestamp: this.getTimestamp(moment()), author: 'Jimi Flynn' };
+    formatPost(title?: string, subtitle?: string, mastheadImgUrl?: string, html?: any, isPrivate = false, tags = [], comments = [], stars = 0) {
+        this.newPost = { title, subtitle, mastheadImgUrl, html, isPrivate, tags, timestamp: this.getTimestamp(moment()), author: 'Jimi Flynn', comments, stars };
     }
 
     getTimestamp(m: moment.Moment) {

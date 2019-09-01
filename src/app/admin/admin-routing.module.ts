@@ -6,6 +6,7 @@ import { AdminComponent } from './admin.component';
 import { AuthGuard } from '../core/guards/auth.guard';
 import { TextEditorComponent } from '../shared/text-editor/text-editor.component';
 import { PostsComponent } from '../shared/posts/posts.component';
+import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
         path: 'dashboard',
         canActivate: [AuthGuard],
         component: DashboardComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: EditComponent
       },
       {
         path: '',

@@ -1,0 +1,36 @@
+<div class="'edit'">
+    <div class="card">
+
+        <div class="card-body">
+            <h4 class="card-title">Edit Post</h4>
+            <p class="card-text">Make your changes then save</p>
+            <div class="form-group">
+                <label for="title">Post Title</label>
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp"
+                    [(ngModel)]="postContent.title">
+                <small id="titleHelp" class="form-text text-muted">Enter A Title For Post</small>
+            </div>
+            <div class="form-group">
+                <label for="subtitle">Post Subtitle</label>
+                <input type="text" class="form-control" name="subtitle" id="subtitle" aria-describedby="subtitleHelp"
+                    [(ngModel)]="postContent.subtitle">
+                <small id="subtitleHelp" class="form-text text-muted">Enter A Post Subtitle</small>
+            </div>
+            <div class="form-group">
+                <label for="imageUrl">Image Url</label>
+                <input type="text" class="form-control" name="imageUrl" id="imageUrl" aria-describedby="helpImg"
+                    [(ngModel)]="postContent.mastheadImgUrl">
+                <small id="helpImg" class="form-text text-muted">Enter a relative image url for masthead</small>
+            </div>
+            <app-text-editor #rteEdit [htmlValue]="postContent?.html"
+                (editorContentChanged)="formatPost(postContent.title, postContent.subtitle, postContent.mastheadImgUrl, $event, postContent.isPrivate, postContent.tags, postContent.comments, postContent.stars)">
+            </app-text-editor>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button class="btn btn-secondary m-2" (click)="navigateTo('admin')">Cancel</button>
+            <button [disabled]="!postContent?.html" class="btn btn-primary m-2"
+                (click)="updatePost(postId, postContent)">Save and Exit</button>
+
+        </div>
+    </div>
+</div>

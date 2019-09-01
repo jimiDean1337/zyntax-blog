@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthService } from '../core/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,7 +10,11 @@ export class HomeComponent implements OnInit {
     title: 'Zyntax Blog',
     subtitle: 'A Blog by Jimi Flynn',
   };
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() { }
+
+  loggedIn() {
+    return this.authService.loggedIn();
+  }
 }

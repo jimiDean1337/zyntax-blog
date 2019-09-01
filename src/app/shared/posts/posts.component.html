@@ -7,19 +7,27 @@
                     <h4 class="card-title text-uppercase">{{post?.title}}</h4>
                     <p class="card-subtitle">{{post?.subtitle}}</p>
                 </div>
+                <img [src]="post?.mastheadImgUrl" [alt]="post?.mastheadImgUrl ? 'Blog Post Image': ''" class="img-fluid"
+                    style="max-width: 200px;margin: 0 auto;">
                 <div class="card-body">
                     <div #html class="panel" [innerHTML]="post?.html | safeHtml">
                     </div>
                     <div class="fade" [style.opacity]="1"></div>
                 </div>
                 <div class="card-footer">
-                    <button class="m-2 btn btn-primary btn-sm"><i class="fa fa-star"></i></button>
-                    <button [hidden]="!currentAdmin" class="m-2 btn btn-dark btn-sm"><i
-                            class="fa fa-pencil"></i></button>
-                    <button class="m-2 btn btn-secondary btn-sm" (click)="navigateTo('post/' + post.id)"><i
-                            class="fa fa-eye"></i></button>
-                    <button [hidden]="!currentAdmin" class="m-2 btn btn-danger btn-sm" (click)="deletePost(post.id)"><i
-                            class="fa fa-trash"></i></button>
+                    <button class="m-2 btn btn-primary btn-sm" (click)="addStarToPost(post?.id)">
+                        <i class="fa fa-star"></i>{{post?.stars?.length || 0}}
+                    </button>
+                    <button class="m-2 btn btn-secondary btn-sm" (click)="openPost(post?.id)">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                    <button [hidden]="!currentAdmin" class="m-2 btn btn-dark btn-sm"
+                        (click)="navigateTo('admin/edit', post?.id)">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    <button [hidden]="!currentAdmin" class="m-2 btn btn-danger btn-sm" (click)="deletePost(post.id)">
+                        <i class="fa fa-trash"></i>
+                    </button>
                 </div>
             </div>
         </li>

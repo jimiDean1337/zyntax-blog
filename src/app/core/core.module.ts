@@ -8,6 +8,8 @@ import { SharedModule } from '../shared/shared.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { CookieService } from 'ngx-cookie-service';
+
 
 import { AuthService } from './auth.service';
 // import { UserService } from './user.service';
@@ -24,6 +26,6 @@ import { environment } from '../../environments/environment';
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  // providers: [AuthService, UserService, ToastService, ShopService],
+  providers: [CookieService],
 })
 export class CoreModule { }

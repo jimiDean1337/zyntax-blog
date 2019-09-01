@@ -5,11 +5,12 @@ import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin.component';
 import { LoginComponent } from './login/login.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
-  declarations: [DashboardComponent, AdminComponent, LoginComponent],
-  exports: [DashboardComponent, AdminComponent, LoginComponent],
-  entryComponents: [AdminComponent, LoginComponent],
+  declarations: [DashboardComponent, AdminComponent, LoginComponent, EditComponent],
+  exports: [DashboardComponent, AdminComponent, LoginComponent, EditComponent],
+  entryComponents: [AdminComponent, LoginComponent, EditComponent],
   imports: [SharedModule, RichTextEditorModule, AdminRoutingModule],
 })
 export class AdminModule { }

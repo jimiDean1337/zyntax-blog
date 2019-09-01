@@ -9,39 +9,48 @@ import { switchMap, map, filter } from 'rxjs/operators';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-  @Input() currentAdmin?: string;
+  @Input() currentAdmin: string;
   @Output() postModified = new EventEmitter<any>();
   adminDataCache: any = {};
-  adminPostsCache: Post[] = [];
+  postsCache: Post[] = [];
   posts$: Observable<Post[]>;
   selectedPost: number;
+  starAdded = false;
   constructor(private router: Router, private route: ActivatedRoute, private postService: PostService) { }
 
   ngOnInit() {
     if (this.currentAdmin) {
       this.postService.getAdmin(this.currentAdmin).subscribe(admin => this.adminDataCache = admin);
     }
-    this.posts$ = this.postService.getAllPublicPosts().pipe(map(posts => this.adminPostsCache = posts));
+    this.posts$ = this.postService.getAllPublicPosts().pipe(map(posts => this.postsCache = posts));
   }
 
-  navigateTo(url: string) {
-    this.router.navigateByUrl(url);
+  async addStarToPost(postId: string) {
+    if (this.starAdded) return;
+    await this.postService.addStarToPost(postId)
+      .then(() => {
+        this.starAdded = true;
+        console.log('star added');
+      })
+      .catch(err => console.log(err));
   }
 
-  openPost(postId: string) {
-    this.router.navigate(['post', `${postId}`], { relativeTo: this.route });
+  async navigateTo(url: string, postId?: string) {
+    return await this.router.navigateByUrl(`${url}/${postId}`, { relativeTo: this.route })
+      .then((val) => console.log('navigated ok', val))
+      .catch(err => console.log(err));
   }
 
-  peekPost(idx: number) {
-    this.selectedPost = idx;
+  async openPost(postId: string) {
+    return await this.navigateTo('post', postId)
+      .then((val) => console.log('navigated ok', val))
+      .catch(err => console.log(err));
   }
 
-  updatePostChanges(data: Post, postId: string) {
-    this.postService.updatePost(postId, data);
-  }
-
-  deletePost(postId: string) {
-    this.postService.deletePostById(postId);
+  async deletePost(postId: string) {
+    return await this.postService.deletePostById(postId)
+      .then(() => console.log('deleted ok'))
+      .catch(err => console.log(err));;
   }
 
 }

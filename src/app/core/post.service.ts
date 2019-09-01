@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { CookieService } from 'ngx-cookie-service';
 import { Subject, Observable } from 'rxjs';
 import { map, filter, switchMap } from 'rxjs/operators';
 
@@ -14,6 +15,7 @@ export interface Post {
   tags?: string[];
   isPrivate?: boolean;
   comments?: any[];
+  stars?: any[];
 }
 @Injectable({
   providedIn: 'root'
@@ -26,14 +28,17 @@ export class PostService {
   ADMIN_ID = 'jimi';
   constructor(
     public afs: AngularFirestore,
+    private cookieService: CookieService
   ) {
-    this.postCollection = this.afs.collection<Post>('posts');
     this.adminAccount$ = this.getAdmin();
+    this.postCollection = this.afs.collection<Post>('posts');
     this.adminPosts$ = this.getAllPublicPosts();
   }
   addNewPost(data: any) {
     data.id = this.afs.createId();
-    this.postCollection.doc(data.id).set(data);
+    data.stars = [];
+    data.comments = [];
+    this.postCollection.doc<Post>(data.id).set(data);
   }
 
   getPostsCollectionLength() {
@@ -43,11 +48,11 @@ export class PostService {
   }
 
   deletePostById(postId: string) {
-    return this.postCollection.doc(postId).delete();
+    return this.postCollection.doc<Post>(postId).delete();
   }
 
   getAdmin(author = this.ADMIN_ID) {
-    return this.afs.doc(`admins/${author}`).valueChanges();
+    return this.afs.doc<any>(`admins/${author}`).valueChanges();
   }
 
   getAllPublicPosts() {
@@ -62,7 +67,17 @@ export class PostService {
       );
   }
 
-  updatePost(postId: string, data: Post) {
-    return this.postCollection.doc(postId).update(data);
+  addStarToPost(postId: string) {
+    const post = this.postsCache.filter(post => post.id === postId)[0];
+    setTimeout(() => {
+      post.stars.push(new Date().toString());
+      return this.updatePost(postId, post);
+    }, 0)
+  }
+
+  updatePost(postId: string, data?: Post) {
+    if (data.html) {
+      return this.postCollection.doc<Post>(postId).update(data);
+    } else return;
   }
 }

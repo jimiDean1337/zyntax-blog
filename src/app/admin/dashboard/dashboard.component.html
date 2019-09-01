@@ -6,7 +6,7 @@
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem (click)="toggleTask('create')">Create Post</button>
                 <button ngbDropdownItem (click)="toggleTask('view')">View Posts</button>
-                <button ngbDropdownItem (click)="toggleTask('edit')">Edit Posts</button>
+
             </div>
         </div>
         <div class="col-6 input-group">
@@ -48,24 +48,6 @@
                     <button class="btn btn-secondary m-2">Cancel</button>
                     <button [disabled]="!newPost.html" class="btn btn-primary m-2">Save and Exit</button>
                     <button [disabled]="!newPost.html" class="btn btn-success m-2"
-                        (click)="publishNewPost(newPost)">Publish</button>
-                </div>
-            </div>
-        </div>
-        <div *ngSwitchCase="'edit'">
-            <div class="card">
-
-                <div class="card-body">
-                    <h4 class="card-title">Edit Post</h4>
-                    <p class="card-text">Make your changes then save</p>
-                    <app-text-editor #rteEdit
-                        (editorContentChanged)="updatePost({title:title.value, subtitle:subtitle.value, html:$event})">
-                    </app-text-editor>
-                </div>
-                <div class="card-footer d-flex justify-content-end">
-                    <button class="btn btn-secondary m-2">Cancel</button>
-                    <button [disabled]="!newPost.html" class="btn btn-primary m-2">Save and Exit</button>
-                    <button [disabled]="!rteEdit.postContentCache$.getValue()" class="btn btn-success m-2"
                         (click)="publishNewPost(newPost)">Publish</button>
                 </div>
             </div>

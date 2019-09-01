@@ -5,5 +5,5 @@
     'Outdent', 'Indent', '|',
     'CreateLink', 'Image', '|', 'ClearFormat', 'Print',
     'SourceCode', 'FullScreen', '|', 'Undo', 'Redo']
-    }" [iframeSettings]='iframe' (valueChange)="showNewValue($event)" [height]='height'></ejs-richtexteditor>
-    
+    }" [iframeSettings]='iframe' [value]="htmlValue" (valueChange)="showNewValue($event)" [height]='height'>
+</ejs-richtexteditor>

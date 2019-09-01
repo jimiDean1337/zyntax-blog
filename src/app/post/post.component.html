@@ -8,8 +8,11 @@
         <div class="card-body">
             <div [innerHTML]="post?.html | safeHtml"></div>
         </div>
-        <div class="card-footer text-muted">
-            Footer
+        <div class="card-footer">
+            <button class="m-2 btn btn-primary btn-sm"><i class="fa fa-star"
+                    (click)="addStarToPost(post?.id)"></i>{{post?.stars?.length || 0}}</button>
+            <button [hidden]="!(loggedIn | async)" class="m-2 btn btn-dark btn-sm" (click)="editPostById(post?.id)"><i
+                    class="fa fa-pencil"></i></button>
         </div>
     </div>
 </div>
