@@ -29,7 +29,17 @@
             ],
             "styles": [
               "src/styles/styles.scss",
-              "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
+              "node_modules/@syncfusion/ej2-base/styles/bootstrap.css",
+              "node_modules/@syncfusion/ej2-icons/styles/bootstrap.css",
+              "node_modules/@syncfusion/ej2-buttons/styles/bootstrap.css",
+              "node_modules/@syncfusion/ej2-splitbuttons/styles/bootstrap.css",
+              "node_modules/@syncfusion/ej2-inputs/styles/bootstrap.css",
+              "node_modules/@syncfusion/ej2-lists/styles/bootstrap.css",
+              "node_modules/@syncfusion/ej2-navigations/styles/bootstrap.css",
+              "node_modules/@syncfusion/ej2-popups/styles/bootstrap.css",
+              "node_modules/@syncfusion/ej2-richtexteditor/styles/bootstrap.css",
+              "node_modules/@syncfusion/ej2-angular-dropdowns/styles/bootstrap.css",
+              "node_modules/@syncfusion/ej2-angular-inputs/styles/material.css"
             ],
             "scripts": []
           },

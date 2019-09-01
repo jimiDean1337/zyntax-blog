@@ -1,1 +1,84 @@
-<p>dashboard works!</p>
+<app-masthead [mastheadData]={}></app-masthead>
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Task</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="toggleTask('create')">Create Post</button>
+                <button ngbDropdownItem (click)="toggleTask('view')">View Posts</button>
+                <button ngbDropdownItem (click)="toggleTask('edit')">Edit Posts</button>
+            </div>
+        </div>
+        <div class="col-6 input-group">
+            <input type="text" class="form-control" name="search" id="search" aria-describedby="searchHelp"
+                placeholder="Search">
+            <button class="input-group-append btn btn-primary"><i class="fa fa-search"></i></button>
+        </div>
+    </nav>
+
+    <div [ngSwitch]="currentTask">
+        <div *ngSwitchCase="'create'">
+            <div class="card text-editor-wrapper animated slideInLeft">
+                <div class="card-body">
+                    <h4 class="card-title">Create New Post</h4>
+                    <p class="card-text">Just shoot from the hip, and let it flow...</p>
+                    <div class="form-group">
+                        <label for="title">Post Title</label>
+                        <input #title type="text" class="form-control" name="title" id="title"
+                            aria-describedby="titleHelp" placeholder="Post Title">
+                        <small id="titleHelp" class="form-text text-muted">Enter A Title For Post</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="subtitle">Post Subtitle</label>
+                        <input #subtitle type="text" class="form-control" name="subtitle" id="subtitle"
+                            aria-describedby="subtitleHelp" placeholder="Post Subtitle">
+                        <small id="subtitleHelp" class="form-text text-muted">Enter A Post Subtitle</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">Image Url</label>
+                        <input #imgUrl type="text" class="form-control" name="imageUrl" id="imageUrl"
+                            aria-describedby="helpImg" placeholder="Image Url">
+                        <small id="helpImg" class="form-text text-muted">Enter a relative image url for masthead</small>
+                    </div>
+                    <app-text-editor #rtePost
+                        (editorContentChanged)="formatPost(title.value, subtitle.value, imgUrl.value, $event)">
+                    </app-text-editor>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button class="btn btn-secondary m-2">Cancel</button>
+                    <button [disabled]="!newPost.html" class="btn btn-primary m-2">Save and Exit</button>
+                    <button [disabled]="!newPost.html" class="btn btn-success m-2"
+                        (click)="publishNewPost(newPost)">Publish</button>
+                </div>
+            </div>
+        </div>
+        <div *ngSwitchCase="'edit'">
+            <div class="card">
+
+                <div class="card-body">
+                    <h4 class="card-title">Edit Post</h4>
+                    <p class="card-text">Make your changes then save</p>
+                    <app-text-editor #rteEdit
+                        (editorContentChanged)="updatePost({title:title.value, subtitle:subtitle.value, html:$event})">
+                    </app-text-editor>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button class="btn btn-secondary m-2">Cancel</button>
+                    <button [disabled]="!newPost.html" class="btn btn-primary m-2">Save and Exit</button>
+                    <button [disabled]="!rteEdit.postContentCache$.getValue()" class="btn btn-success m-2"
+                        (click)="publishNewPost(newPost)">Publish</button>
+                </div>
+            </div>
+        </div>
+        <div *ngSwitchCase="'view'">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Your Posts</h4>
+                    <p class="card-text">All of the classics</p>
+                </div>
+                <app-posts [currentAdmin]="'jimi'"></app-posts>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from './core/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,9 +8,26 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AppComponent {
   title = 'zyntax-blog';
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  showCollapsed = false;
+  constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute) { }
 
-  navigateTo(url: string, ...params: any[]) {
-    return this.router.navigate([url, ...params], { relativeTo: this.route });
+  loggedIn() {
+    return this.auth.loggedIn();
+  }
+
+  signOut() {
+    return this.navigateTo('home')
+      .then(() => {
+        return this.auth.signOut()
+          .then(res => this.showCollapsed = false);
+      });
+  }
+
+  navigateTo(url: string, params = []) {
+    return this.router.navigate([url, params.map(val => val)], { relativeTo: this.route }).then(success => this.showCollapsed = false);
+  }
+
+  toggleCollapse() {
+    this.showCollapsed = !this.showCollapsed;
   }
 }

@@ -5,21 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
-import { PostsModule } from './posts/posts.module';
-import { PostComponent } from './post/post.component';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
+import { CoreModule } from './core/core.module';
+import { PostComponent } from './post/post.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ContactComponent, PostComponent],
+  declarations: [AppComponent, HomeComponent, ContactComponent, PostComponent, AboutComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    PostsModule,
     SharedModule,
     AdminModule,
+    CoreModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,0 +1,9 @@
+<ejs-richtexteditor id="apiRTE" #apiRTE [toolbarSettings]="{type: 'Expand', items: ['Bold', 'Italic', 'Underline', 'StrikeThrough',
+    'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
+    'LowerCase', 'UpperCase', '|',
+    'Formats', 'Alignments', 'OrderedList', 'UnorderedList',
+    'Outdent', 'Indent', '|',
+    'CreateLink', 'Image', '|', 'ClearFormat', 'Print',
+    'SourceCode', 'FullScreen', '|', 'Undo', 'Redo']
+    }" [iframeSettings]='iframe' (valueChange)="showNewValue($event)" [height]='height'></ejs-richtexteditor>
+    

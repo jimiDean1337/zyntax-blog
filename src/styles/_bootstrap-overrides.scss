@@ -12,6 +12,7 @@
 .btn-primary {
   background-color: $primary;
   border-color: $primary;
+
   &:hover,
   &:focus,
   &:active {
@@ -24,4 +25,10 @@
 .btn-lg {
   font-size: 16px;
   padding: 25px 35px;
+}
+
+nav ul.navbar-nav {
+  li {
+    cursor: pointer !important;
+  }
 }

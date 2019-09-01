@@ -7,11 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   mastheadData = {
-    backgroundImage: 'assets/img/home_masthead_bg.jpg',
     title: 'Zyntax Blog',
     subtitle: 'A Blog by Jimi Flynn',
   };
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

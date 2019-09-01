@@ -1,0 +1,7 @@
+EditPost:
+    ☐ add post edit component -m PostsModule
+        ☐ toggle in and out of view
+        ☐ use rich text editor
+        ☐ access post content by id
+        ☐ update post content by id
+        ☐ 

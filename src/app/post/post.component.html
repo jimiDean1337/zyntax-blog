@@ -1,1 +1,15 @@
-<p>post works!</p>
+<app-masthead [mastheadData]="{backgroundImage: post?.mastheadImgUrl, title: post?.title, subtitle: post?.subtitle}">
+    <p class="text-center text-light"><b class="text-muted text-white">Posted By</b>
+        {{post?.author}}, <b class="text-muted text-white">Posted
+            on</b> {{post?.timestamp}}</p>
+</app-masthead>
+<div class="container">
+    <div class="card p-2">
+        <div class="card-body">
+            <div [innerHTML]="post?.html | safeHtml"></div>
+        </div>
+        <div class="card-footer text-muted">
+            Footer
+        </div>
+    </div>
+</div>

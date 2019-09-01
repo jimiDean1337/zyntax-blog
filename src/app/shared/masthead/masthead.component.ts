@@ -7,7 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MastheadComponent implements OnInit {
   @Input() mastheadData: any;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.mastheadData.backgroundImage) {
+      this.mastheadData.backgroundImage = 'http://lorempixel.com/abstract/1500/1000';
+    }
+  }
 }
