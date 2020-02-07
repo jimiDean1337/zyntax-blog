@@ -1,12 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { PostService, Post } from '../../core/post.service';
 import { Observable } from 'rxjs';
 import { switchMap, map, filter } from 'rxjs/operators';
+import { JsonAdaptor } from '@syncfusion/ej2-data';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.scss']
+  styleUrls: ['./posts.component.scss'],
+
 })
 export class PostsComponent implements OnInit {
   @Input() currentAdmin: string;
@@ -14,9 +17,9 @@ export class PostsComponent implements OnInit {
   adminDataCache: any = {};
   postsCache: Post[] = [];
   posts$: Observable<Post[]>;
-  selectedPost: number;
+  selectedPost: string;
   starAdded = false;
-  constructor(private router: Router, private route: ActivatedRoute, private postService: PostService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private postService: PostService, private cookie: CookieService) { }
 
   ngOnInit() {
     if (this.currentAdmin) {
@@ -27,7 +30,7 @@ export class PostsComponent implements OnInit {
 
   async addStarToPost(postId: string) {
     if (this.starAdded) return;
-    await this.postService.addStarToPost(postId)
+    return await this.postService.addStarToPost(postId)
       .then(() => {
         this.starAdded = true;
         console.log('star added');
@@ -35,14 +38,20 @@ export class PostsComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
-  async navigateTo(url: string, postId?: string) {
-    return await this.router.navigateByUrl(`${url}/${postId}`, { relativeTo: this.route })
-      .then((val) => console.log('navigated ok', val))
-      .catch(err => console.log(err));
+  navigateTo(url: string, postId?: string) {
+    return this.router.navigateByUrl(`${url}/${postId}`);
   }
 
-  async openPost(postId: string) {
-    return await this.navigateTo('post', postId)
+  openPost(postId: string) {
+    const toStringPostId = JSON.stringify(postId);
+    this.selectedPost = postId;
+    setTimeout(() => {
+      if (this.cookie.check('selectedPost')) {
+        this.cookie.delete('selectedPost');
+      }
+    }, 500)
+    this.cookie.set('selectedPost', toStringPostId);
+    this.navigateTo('post', postId)
       .then((val) => console.log('navigated ok', val))
       .catch(err => console.log(err));
   }

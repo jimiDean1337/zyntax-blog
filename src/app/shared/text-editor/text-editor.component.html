@@ -5,5 +5,8 @@
     'Outdent', 'Indent', '|',
     'CreateLink', 'Image', '|', 'ClearFormat', 'Print',
     'SourceCode', 'FullScreen', '|', 'Undo', 'Redo']
-    }" [iframeSettings]='iframe' [value]="htmlValue" (valueChange)="showNewValue($event)" [height]='height'>
+    }" [value]="htmlValue" (valueChange)="showNewValue($event)" [insertImageSettings]="insertImageSettings"
+    [height]="500" (imageSelected)="uploadImage($event)" (imageRemoving)="removeImage($event)"
+    (dialogClose)="uploadSuccess($event)">
+    <ng-template #valueTemplate></ng-template>
 </ejs-richtexteditor>

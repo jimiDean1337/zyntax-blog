@@ -6,7 +6,7 @@
       aria-expanded="false" aria-label="Toggle navigation" (click)="toggleCollapse()">
       <i class="fa fa-bars"></i>
     </button>
-    <div class="navbar-collapse" [ngClass]="!showCollapsed ? 'collapse':''" id="navbarResponsive">
+    <div class="navbar-collapse" [ngClass]="!showCollapsed  ? 'collapse':'slideInDown'" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item ml-3 mr-3 btn btn-link text-muted" (click)="navigateTo('home')">
           HOME
@@ -68,7 +68,7 @@
             </a>
           </li>
         </ul>
-        <p class="copyright text-muted">Copyright &copy; MedTelPlus 2019</p>
+        <p class="copyright text-muted">Copyright &copy; Jimi Flynn 2020</p>
       </div>
     </div>
   </div>

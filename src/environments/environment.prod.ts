@@ -1,12 +1,13 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: "AIzaSyCkD82bRWuiQXTIiY36ZhOCt8ECDPdzKV4",
-    authDomain: "med-tel-plus.firebaseapp.com",
-    databaseURL: "https://med-tel-plus.firebaseio.com",
-    projectId: "med-tel-plus",
-    storageBucket: "med-tel-plus.appspot.com",
-    messagingSenderId: "767947870810",
-    appId: "1:767947870810:web:e863a33bb9f39c59"
+    apiKey: `AIzaSyBNtWlByKyvQR81oDRok_Ia4qY3wbTXNAA`,
+    authDomain: `zyntax-3da6b.firebaseapp.com`,
+    databaseURL: `https://zyntax-3da6b.firebaseio.com`,
+    projectId: `zyntax-3da6b`,
+    storageBucket: `zyntax-3da6b.appspot.com`,
+    messagingSenderId: `208716023509`,
+    appId: `1:208716023509:web:70e88b13b8907f36e4445c`,
+    measurementId: `G-330NDGL15H`
   }
 };

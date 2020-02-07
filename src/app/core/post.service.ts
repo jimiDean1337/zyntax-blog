@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject, Observable } from 'rxjs';
-import { map, filter, switchMap } from 'rxjs/operators';
+import { map, filter, switchMap, finalize } from 'rxjs/operators';
 
 export interface Post {
   id?: string;
+  iconOrThumb?: string;
   timestamp?: any;
   title?: string;
   mastheadImgUrl?: string;
@@ -13,6 +15,7 @@ export interface Post {
   html?: any;
   author?: string;
   tags?: string[];
+  images?: any[];
   isPrivate?: boolean;
   comments?: any[];
   stars?: any[];
@@ -26,18 +29,20 @@ export class PostService {
   adminPosts$: Observable<Post[]>;
   postsCache: Post[];
   ADMIN_ID = 'jimi';
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
   constructor(
     public afs: AngularFirestore,
+    public storage: AngularFireStorage,
     private cookieService: CookieService
   ) {
     this.adminAccount$ = this.getAdmin();
     this.postCollection = this.afs.collection<Post>('posts');
     this.adminPosts$ = this.getAllPublicPosts();
+
   }
   addNewPost(data: any) {
     data.id = this.afs.createId();
-    data.stars = [];
-    data.comments = [];
     this.postCollection.doc<Post>(data.id).set(data);
   }
 
@@ -71,8 +76,8 @@ export class PostService {
     const post = this.postsCache.filter(post => post.id === postId)[0];
     setTimeout(() => {
       post.stars.push(new Date().toString());
-      return this.updatePost(postId, post);
     }, 0)
+    return this.updatePost(postId, post);
   }
 
   updatePost(postId: string, data?: Post) {
@@ -80,4 +85,9 @@ export class PostService {
       return this.postCollection.doc<Post>(postId).update(data);
     } else return;
   }
+
+  // uploadImage(postId: string, filePath: string, url: string) {
+  //   this.updatePost(postId)
+
+  // }
 }

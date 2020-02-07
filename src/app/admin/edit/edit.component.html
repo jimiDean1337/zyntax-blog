@@ -22,14 +22,19 @@
                     [(ngModel)]="postContent.mastheadImgUrl">
                 <small id="helpImg" class="form-text text-muted">Enter a relative image url for masthead</small>
             </div>
-            <app-text-editor #rteEdit [htmlValue]="postContent?.html"
-                (editorContentChanged)="formatPost(postContent.title, postContent.subtitle, postContent.mastheadImgUrl, $event, postContent.isPrivate, postContent.tags, postContent.comments, postContent.stars)">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input #isPrivate type="checkbox" class="form-check-input" [(ngModel)]="postContent.isPrivate"
+                        name="privacy" id="privacy" value="true">
+                    Private
+                </label>
+            </div>
+            <app-text-editor #rteEdit [htmlValue]="postContent?.html" (imageUploaded)="uploadImage($event)">
             </app-text-editor>
         </div>
         <div class="card-footer d-flex justify-content-end">
             <button class="btn btn-secondary m-2" (click)="navigateTo('admin')">Cancel</button>
-            <button [disabled]="!postContent?.html" class="btn btn-primary m-2"
-                (click)="updatePost(postId, postContent)">Save and Exit</button>
+            <button class="btn btn-primary m-2" (click)="updatePost(postId, postContent)">Save and Exit</button>
 
         </div>
     </div>

@@ -1,4 +1,24 @@
-@import 'clean-blog';
+@import "variables.scss";
+
 @import 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 @import '../../node_modules/animate.css/animate.css';
+@import "~@syncfusion/ej2-base/styles/bootstrap.css";
+@import "~@syncfusion/ej2-icons/styles/bootstrap.css";
+@import "~@syncfusion/ej2-buttons/styles/bootstrap.css";
+@import "~@syncfusion/ej2-splitbuttons/styles/bootstrap.css";
+@import "~@syncfusion/ej2-inputs/styles/bootstrap.css";
+@import "~@syncfusion/ej2-lists/styles/bootstrap.css";
+@import "~@syncfusion/ej2-navigations/styles/bootstrap.css";
+@import "~@syncfusion/ej2-popups/styles/bootstrap.css";
+@import "~@syncfusion/ej2-richtexteditor/styles/bootstrap.css";
+@import "~@syncfusion/ej2-angular-dropdowns/styles/bootstrap.css";
+@import "~@syncfusion/ej2-angular-inputs/styles/material.css";
+@import "mixins.scss";
+@import "global.scss";
+@import "navbar.scss";
+@import "masthead.scss";
+@import "post.scss";
+@import "contact.scss";
+@import "footer.scss";
+@import "bootstrap-overrides.scss";

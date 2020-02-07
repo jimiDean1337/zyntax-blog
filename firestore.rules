@@ -1,29 +1,28 @@
+rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
   // True if the user is signed in or the requested data is 'public'
-    function signedInOrPublic() {
+    function signedIn() {
       return request.auth.uid != null;
     }
     
     match /admins/{adminId} {
-    	allow read, write, update: if signedInOrPublic();
+    	allow read, write, update: if signedIn();
     }
     
     match /posts/{postId} {
       	allow read;
-        allow write, update: if signedInOrPublic();
+        allow write, update: if signedIn();
       }
 
-    match /transactions/{transaction} {
-      allow read, write, update;
-    }
-
     match /contacts/{contact} {
-      allow write;
+      allow write, update;
+      allow read: if signedIn();
     }
 
     match /subscribers/{subscriber} {
       allow write;
+      allow read: if signedIn();
     }
   }
 

@@ -1,14 +1,14 @@
 {
   "targets": {
-    "med-tel-plus": {
+    "blog-medtelplus-6def9": {
       "hosting": {
         "zyntax-blog": [
-          "med-tel-plus"
+          "blog-medtelplus-6def9"
         ]
       }
     }
   },
   "projects": {
-    "default": "med-tel-plus"
+    "default": "blog-medtelplus-6def9"
   }
 }

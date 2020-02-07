@@ -1,4 +1,4 @@
-<header class="masthead" [style.background-image]="'url(' + mastheadData?.backgroundImage + ')'"
+<header class="masthead" [style.background-image]="'url(' + mastheadData.backgroundImage + ')'"
   [style.background-attachment]="'fixed'">
   <div class="overlay"></div>
   <div class="container">
@@ -7,9 +7,9 @@
         <div class="site-heading text-uppercase">
           <h1>{{ mastheadData?.title }}</h1>
           <span class="subheading text-uppercase">{{ mastheadData?.subtitle }}</span>
-          <img [hidden]="!mastheadData?.iconOrThumb" [src]="mastheadData?.iconOrThumb" width="50" alt="" />
+          <img [hidden]="!mastheadData.iconOrThumb" [src]="mastheadData?.iconOrThumb" width="50" alt="" />
         </div>
-        <div class="site-headeing-input">
+        <div class="site-heading-input">
           <ng-content></ng-content>
         </div>
       </div>

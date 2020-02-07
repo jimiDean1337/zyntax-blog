@@ -7,8 +7,9 @@ import { AuthService } from '../core/auth.service';
 })
 export class HomeComponent implements OnInit {
   mastheadData = {
-    title: 'Zyntax Blog',
-    subtitle: 'A Blog by Jimi Flynn',
+    title: 'A Blog by Jimi Flynn',
+    subtitle: 'Tech, Dev, and More',
+    backgroundImage: 'https://blog.hubspot.com/hubfs/product-marketing-1.jpg'
   };
   constructor(private authService: AuthService) { }
 

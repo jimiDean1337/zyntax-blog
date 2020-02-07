@@ -21,7 +21,11 @@ export class AuthService {
   // Check if user is logged in
   // @returns boolean
   loggedIn() {
-    return this.afAuth.authState.pipe(map(user => !!user));
+    return this.afAuth.authState.pipe(map(user => {
+      console.log('user logged in', user);
+      return !!user
+    }));
+
   }
 
   // Login with simple email and password
@@ -30,7 +34,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(onSuccess => this.getAdminData(author))
       .catch(error => {
-        // console.log(error);
+        console.log(error);
       });
   }
 

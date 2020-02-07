@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostsComponent } from './posts/posts.component';
@@ -13,8 +14,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
 
 @NgModule({
   declarations: [MastheadComponent, PostsComponent, TextEditorComponent, SafeHtmlPipe],
-  imports: [CommonModule, FormsModule, NgbModule, RichTextEditorModule, ToolbarModule, UploaderModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, NgbModule, RichTextEditorModule, ToolbarModule, UploaderModule],
   entryComponents: [PostsComponent, TextEditorComponent],
-  exports: [MastheadComponent, NgbModule, PostsComponent, CommonModule, TextEditorComponent, SafeHtmlPipe, ToolbarModule, UploaderModule, FormsModule],
+  exports: [MastheadComponent, NgbModule, PostsComponent, CommonModule, HttpClientModule, TextEditorComponent, SafeHtmlPipe, ToolbarModule, UploaderModule, FormsModule],
 })
 export class SharedModule { }

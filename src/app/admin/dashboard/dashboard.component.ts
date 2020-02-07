@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ParamMap } from '@angular/router';
 import * as moment from 'moment';
+import { AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { PostService, Post } from '../../core/post.service';
 import { Observable } from 'rxjs';
-import { switchMap, map, filter } from 'rxjs/operators';
+import { switchMap, map, filter, tap, finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-dashboard',
@@ -15,14 +16,39 @@ export class DashboardComponent implements OnInit {
     newPost: any = {};
     selectedPost: Post = {};
     posts$: Observable<Post[]>;
+
+    hasUploadedImage = false;
+    uploadedImages: any[] = [];
+
+    uploadPercent$: Observable<number>;
+    downloadURL$: Observable<string>;
     currentTask = 'view';
     constructor(private postService: PostService, private router: Router) { }
 
     ngOnInit() {
     }
 
-    formatPost(title?: string, subtitle?: string, mastheadImgUrl?: string, html?: any, isPrivate = false, tags = [], comments = [], stars = 0) {
-        this.newPost = { title, subtitle, mastheadImgUrl, html, isPrivate, tags, timestamp: this.getTimestamp(moment()), author: 'Jimi Flynn', comments, stars };
+    uploadImage(e: any) {
+        const images = this.newPost.images || this.uploadedImages;
+        const filePath = e.filePath;
+        const fileRef: AngularFireStorageReference = e.fileRef;
+        const task: AngularFireUploadTask = e.task;
+        if (this.newPost.images && this.newPost.length > 3) {
+            return;
+        }
+        console.log('uploaded image to:', { filePath, fileRef, task });
+
+        // get notified when the download URL is available
+        task.snapshotChanges().pipe(
+            finalize(() => {
+                fileRef.getDownloadURL()
+                    .subscribe(url => {
+                        images.push({ filePath, url });
+                        console.log('image url: ', url, images);
+                    });
+            })
+        )
+            .subscribe()
     }
 
     getTimestamp(m: moment.Moment) {
@@ -33,8 +59,15 @@ export class DashboardComponent implements OnInit {
         this.router.navigateByUrl(url, { queryParams });
     }
 
+    getEditorContent(content) {
+        this.newPost.html = content;
+    }
+
     publishNewPost(data: any) {
-        console.log('rte content', data);
+        setTimeout(() => {
+            data.timestamp = this.getTimestamp(moment());
+        })
+        console.log('post data', data);
         this.postService.addNewPost(data);
         setTimeout(() => this.toggleTask('view'), 0)
     }
